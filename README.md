@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/kriskowal/q.png)](http://travis-ci.org/kriskowal/q)
+[![Build Status](https://secure.travis-ci.org/CrabBot/proxis.png)](http://travis-ci.org/CrabBot/proxis)
 
 If a function cannot return a value or throw an exception without
 blocking, it can return a promise instead.  A promise is an object
