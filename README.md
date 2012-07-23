@@ -2,7 +2,7 @@
 
 #Proxis
 
-Proxis extends the already outstanding [Q][Q-lib] promise library with [Harmony Proxies][H-Proxies] support. Proxis returns a ``function`` with the all original `Q` properties **unchanged** allowing proxis to replace Q as a dependency. [Skip to the bottom][bottom] to see the additional `Proxy` documentation.
+Proxis extends the already outstanding [Q][Q-lib] promise library with [Harmony Proxies][H-Proxies] support. Proxis returns a ``function`` with the all original `Q` properties **unchanged** allowing proxis to replace `Q` as a dependency. [Skip to the bottom][proxy-fn] to see the additional `Proxy` documentation or [additional functions][add-fn].
 
 **Proxis requires the `--harmony-proxies` node flag support. (v0.6.0+)**
 
@@ -10,7 +10,8 @@ Proxis extends the already outstanding [Q][Q-lib] promise library with [Harmony 
 
 [Q-lib]: https://github.com/kriskowal/q
 [H-Proxies]: http://wiki.ecmascript.org/doku.php?id=harmony:proxies
-[bottom]: http://github.com/CrabBot/proxis/#proxies
+[proxy-fn]: http://github.com/CrabBot/proxis/#proxies
+[add-fn]: http://github.com/CrabBot/proxis/#additional-functions
 
 ***
 
@@ -634,6 +635,40 @@ will [be ameliorated][streamsnext].
 
 [streams]: https://groups.google.com/d/topic/q-continuum/xr8znxc_K5E/discussion
 [streamsnext]: http://maxogden.com/node-streams#streams.next
+
+***
+
+### Additional functions
+
+A few additional functions have been added to Q to help with node style callbacks: `Q.wrap` and `promise.both`:
+
+`Q.wrap`
+
+For when your functions need to support both promises and node-style callbacks, `Q.wrap` conveniently allows you to resolve to either:
+
+```javascript
+function(path, cb) {
+    return Q.wrap(Q.ncall(fs.readFile, fs));
+}
+```
+
+`promise.both`
+
+For when you do not plan to return the promise, like in a connect middleware, `promise.both` conveniently allows you to resolve to a callback:
+
+```javascript
+function(req, res, next) {
+	Q.ncall(fs.readFile, fs, './config.json')
+	.then(function(config) {
+	    if (config[referers].indexOf(req.headers['Referer'])) === -1)
+	        return new Error("You are not allowed here!");
+	})
+	.both(next);
+    return Q.wrap(Q.ncall(fs.readFile, fs));
+}
+```
+
+
 
 ### Proxies
 
