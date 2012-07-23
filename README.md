@@ -1,5 +1,17 @@
 [![Build Status](https://secure.travis-ci.org/CrabBot/proxis.png?branch=master)](http://travis-ci.org/CrabBot/proxis)
 
+#Proxis
+
+Proxis extends the already outstanding [Q][Q-lib] promise library with [Harmony Proxies][H-Proxies] support. Proxis returns a ``function`` with the all original `Q` properties **unchanged** allowing proxis to replace Q as a dependency. [Skip to the bottom][bottom] to see the additional `Proxy` documentation.
+
+**Proxis is not currently published on npm. Come back soon for updates.**
+
+[Q-lib]: https://github.com/kriskowal/q
+[H-Proxies]: http://wiki.ecmascript.org/doku.php?id=harmony:proxies
+[bottom]: http://github.com/CrabBot/proxis/#proxies
+
+================
+
 If a function cannot return a value or throw an exception without
 blocking, it can return a promise instead.  A promise is an object
 that represents the return value or the thrown exception that the
@@ -620,6 +632,42 @@ will [be ameliorated][streamsnext].
 
 [streams]: https://groups.google.com/d/topic/q-continuum/xr8znxc_K5E/discussion
 [streamsnext]: http://maxogden.com/node-streams#streams.next
+
+### Proxies
+
+`Proxy` support adds a shorthand for Q.ncall. Allowing you to replace:
+
+```javascript
+var fs = require('fs');
+return Q.ncall(fs.readFile, fs, "foo.txt");
+```
+
+with
+
+```javascript
+var fs = require('fs');
+return Q(fs).readFile("foo.txt");
+```
+
+Additionally, for when you want to execute a series of calls, the `Q.lazy` function adds lazy function invocation support for the above proxy shorthand, allowing you to replace:
+
+
+```javascript
+var fs = require('fs');
+return Q(fs).readFile("foo.txt")
+    .then(function(data) {
+        fs.writeFile("foo_copy.txt", data)
+    })
+```
+
+with
+
+
+```javascript
+var fs = require('fs');
+return Q(fs).writeFile("foo.txt", 'hello world!')
+	.then(Q.lazy(fs).readFile("foo.txt"))
+```
 
 ## Reference
 
