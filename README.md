@@ -656,10 +656,10 @@ Additionally, for when you want to execute a series of calls, the `Q.lazy` funct
 
 ```javascript
 var fs = require('fs');
-return Q(fs).readFile("foo.txt")
+return Q(fs).mkdir("./foo")
     .then(function(data) {
-        fs.writeFile("foo_copy.txt", data)
-    })
+        return Q.ncall(fs.writeFile, fs, "bar.txt", "hello world!");
+    });
 ```
 
 with
@@ -667,8 +667,8 @@ with
 
 ```javascript
 var fs = require('fs');
-return Q(fs).writeFile("foo.txt", 'hello world!')
-	.then(Q.lazy(fs).readFile("foo.txt"))
+return Q(fs).mkdir("./foo")
+	.then(Q.lazy(fs).writeFile("bar.txt", "hello world!"));
 ```
 
 ## Reference
