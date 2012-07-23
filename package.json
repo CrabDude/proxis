@@ -6,6 +6,9 @@
         "type": "git",
         "url": "git://github.com/crabbot/proxis.git"
     },
+    "engines": {
+        "node": ">=0.6.0"
+    },
     "main": "index.js",
     "scripts": {
         "test": "mocha --harmony-proxies --reporter spec --timeout 1000 ./test/*.js"

@@ -4,6 +4,8 @@
 
 Proxis extends the already outstanding [Q][Q-lib] promise library with [Harmony Proxies][H-Proxies] support. Proxis returns a ``function`` with the all original `Q` properties **unchanged** allowing proxis to replace Q as a dependency. [Skip to the bottom][bottom] to see the additional `Proxy` documentation.
 
+**Proxis requires the `--harmony-proxies` node flag support. (v0.6.0+)**
+
 **Proxis is not currently published on npm. Come back soon for updates.**
 
 [Q-lib]: https://github.com/kriskowal/q
