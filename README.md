@@ -12,7 +12,7 @@ Proxis extends the already outstanding [Q][Q-lib] promise library with [Harmony 
 [H-Proxies]: http://wiki.ecmascript.org/doku.php?id=harmony:proxies
 [bottom]: http://github.com/CrabBot/proxis/#proxies
 
-================
+***
 
 If a function cannot return a value or throw an exception without
 blocking, it can return a promise instead.  A promise is an object
