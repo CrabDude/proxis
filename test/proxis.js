@@ -76,6 +76,23 @@ describe('proxis', function () {
         });
     });
 
+    describe('promise.both', function() {
+        it('should call the callback on success', function() {
+            Q(fs).readFile('./proxis.js')
+                .both(function(err) {
+                    expect(err).to.not.exist;
+                    done();
+                });
+        });
+        it('should call the callback on failure', function() {
+            Q(fs).readFile('')
+                .both(function(err) {
+                    expect(err).to.exist;
+                    done();
+                });
+        });
+    })
+
     describe('lazy', function() {
         it('should return a function', function() {
             expect(Q.lazy(fs).readFile('./proxis.js')).to.be.instanceof.Function;
