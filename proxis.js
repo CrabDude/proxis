@@ -27,6 +27,10 @@ Q.wrap = function wrap(promise, callback) {
     });
 };
 
+Q.map = function map(arr, fn) {
+    return Q.all(arr.map(fn));
+};
+
 
 function $xy(obj, opts, that) {
     // Don't proxy immutables
