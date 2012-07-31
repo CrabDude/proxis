@@ -6,8 +6,8 @@ Q.makePromise.prototype.wrap = function() {
 	return this;
 };
 
-Q.makePromise.prototype.both = function() {
-	return Q.wrap.apply(Q, [this].concat(Array.prototype.slice.call(arguments)));
+Q.makePromise.prototype.both = function(cb) {
+    return this.then(cb.bind(null, null), cb);
 };
 
 Q.wrap = function wrap(promise, callback) {

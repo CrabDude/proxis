@@ -1,6 +1,6 @@
 {
     "name": "proxis",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Proxy-based fork of Q",
     "repository": {
         "type": "git",
