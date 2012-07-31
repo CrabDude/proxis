@@ -7,6 +7,7 @@ Q.makePromise.prototype.wrap = function() {
 };
 
 Q.makePromise.prototype.both = function(cb) {
+    if (typeof cb !== 'function') return this;
     return this.then(cb.bind(null, null), cb);
 };
 
